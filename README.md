@@ -6,6 +6,7 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 * Part 1 - Drawing the '@' symbol and moving it around [v1.1.0]
 * Part 2 - The generic Entity, the render functions, and the map
 * Part 3 - Generating a dungeon
+* Part 4 - Field of View
 
 
 ## Notes
@@ -20,5 +21,10 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 
 1. I'm still not having much luck with the type annotations and I think they might be confusing for a tutorial.
 2. Some of the functions have a lot of arguments.It might be easier to keep them all in a config object.
+
+### Part 4
+
+1. I rushed through this because I'm catching up but the results are very cool.
+2. The Numpy stuff might be overcomplicated for a tutorial though.
 
 
