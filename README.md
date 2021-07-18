@@ -4,9 +4,9 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 
 * Part 0 - Setting Up [no tag]
 * Part 1 - Drawing the '@' symbol and moving it around [v1.1.0]
-* Part 2 - The generic Entity, the render functions, and the map
-* Part 3 - Generating a dungeon
-* Part 4 - Field of View
+* Part 2 - The generic Entity, the render functions, and the map [v1.2.0]
+* Part 3 - Generating a dungeon [v1.3.0]
+* Part 4 - Field of View [v1.4.0]
 
 
 ## Notes
