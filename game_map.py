@@ -1,11 +1,13 @@
+from typing import Iterable
 import numpy as np
 from tcod.console import Console
 import tile_types
 
 class GameMap:
-    def __init__(self, width: int, height: int):
+    def __init__(self, width: int, height: int, entities=()):
         self.width = width
         self.height = height
+        self.entities = set(entities)
 
         # create the actual map 
         self.tiles = np.full((width, height),
@@ -22,6 +24,14 @@ class GameMap:
                                 fill_value=False,
                                 order="F")
 
+
+    def get_blocking_entity_at_location(self, location_x, location_y):
+        for entity in self.entities:
+            if entity.blocks_movement and (entity.x == location_x) and (entity.y == location_y):
+                return entity
+        return None
+    
+            
     def in_bounds(self, x: int, y: int) -> bool:
         """True if (x,y) is in bounds"""
         return (0 <= x < self.width) and (0 <= y < self.height)
@@ -37,6 +47,11 @@ class GameMap:
             condlist=[self.visible, self.explored],
             choicelist=[self.tiles["light"], self.tiles["dark"]],
             default=tile_types.SHROUD)
-        
+
+        for entity in self.entities:
+            # only render entities that are in the FOV
+            if self.visible[entity.x, entity.y]:
+                console.print(entity.x, entity.y, entity.char, fg=entity.color)
+
 
     

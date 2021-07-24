@@ -7,6 +7,7 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 * Part 2 - The generic Entity, the render functions, and the map [v1.2.0]
 * Part 3 - Generating a dungeon [v1.3.0]
 * Part 4 - Field of View [v1.4.0]
+* Part 5 - Placing Enemies and kicking them (harmlessly) [v1.5.0]
 
 
 ## Notes
