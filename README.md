@@ -28,4 +28,14 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 1. I rushed through this because I'm catching up but the results are very cool.
 2. The Numpy stuff might be overcomplicated for a tutorial though.
 
+### Part 5
+
+1. Still playing catch up
+2. I've just about given up on the type annotations. They may be useful but they do obscure the code's meaning.
+
+
+### 5.1 Refactoring
+
+1. Aaargh!
+2. I'm removing the type annotations as I revisit code
 
