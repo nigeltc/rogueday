@@ -26,6 +26,18 @@ class GameMap:
                                 order="F")
 
 
+    @property
+    def actors(self):
+        yield from (
+            entity for entity in self.entities
+            if isinstance(entity, Actor) and entity.is_alive)
+
+    def get_actor_at_location(self, x, y):
+        for actor in self.actors:
+            if actor.x == x and actor.y == y:
+                return actor
+        return None
+    
     def get_blocking_entity_at_location(self, location_x, location_y):
         for entity in self.entities:
             if entity.blocks_movement and (entity.x == location_x) and (entity.y == location_y):

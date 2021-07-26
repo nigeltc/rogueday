@@ -59,4 +59,31 @@ class Entity:
         self.x += dx
         self.y += dy
 
+
+class Actor(Entity):
+    def __init__(
+            self,
+            *,
+            x=0,
+            y=0,
+            char="?",
+            color=(255, 255, 255),
+            name="<unamed>",
+            ai_cls=None,
+            fighter=None):
+        super().__init__(
+            x=x,
+            y=y,
+            char=char,
+            color=color,
+            name=name,
+            blocks_movement=True)
+        self.ai = ai_cls(self)
+        self.fighter = fighter
+        self.fighter.entity = self
+
+    @property
+    def is_alive(self):
+        return bool(self.ai)
+
     
