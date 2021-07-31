@@ -9,13 +9,13 @@ from tcod.map import compute_fov
 
 from entity import Entity
 from game_map import GameMap
-from input_handlers import EventHandler
+from input_handlers import MainGameEventHandler
 
 class Engine:
     gamemap = None
     
     def __init__(self, player):
-        self.event_handler = EventHandler(self)
+        self.event_handler = MainGameEventHandler(self)
         self.player = player
 
     def handle_enemy_turns(self):
@@ -33,7 +33,11 @@ class Engine:
         self.game_map.explored |= self.game_map.visible
         
             
-    def render(self, console: Console, context: Context) -> None:
+    def render(self, console, context):
         self.game_map.render(console)
+
+        console.print(x=1, y=47,
+                      string=f"HP: {self.player.fighter.hp}")
+        
         context.present(console)
         console.clear()

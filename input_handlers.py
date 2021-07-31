@@ -46,6 +46,14 @@ class EventHandler(tcod.event.EventDispatch[Action]):
         self.engine = engine
 
     def handle_events(self):
+        raise NotImplementedError()
+
+    def ev_quit(self, event):
+        raise SystemExit()
+
+class MainGameEventHandler(EventHandler):
+    
+    def handle_events(self):
         for event in tcod.event.wait():
             action = self.dispatch(event)
             if action is None:
@@ -55,10 +63,6 @@ class EventHandler(tcod.event.EventDispatch[Action]):
             # handle enemy turns & update FoV before player's next action
             self.engine.handle_enemy_turns()
             self.engine.update_fov()
-
-
-    def ev_quit(self, event: tcod.event.Quit) -> Optional[Action]:
-        raise SystemExit()
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[Action]:
         action: Optional[Action] = None
@@ -74,4 +78,23 @@ class EventHandler(tcod.event.EventDispatch[Action]):
             action = EscapeAction(player)
 
         return action
-            
+
+    
+class GameOverEventHandler(EventHandler):
+    
+    def handle_events(self):
+        for event in tcod.event.wait():
+            action = self.dispatch(event)
+            if action is None:
+                continue
+            action.perform()
+
+    
+    def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[Action]:
+        action: Optional[Action] = None
+
+        key = event.sym
+        if key == tcod.event.K_ESCAPE:
+            action = EscapeAction(self.engine.player)
+
+        return action

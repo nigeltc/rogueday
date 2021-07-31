@@ -8,6 +8,7 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 * Part 3 - Generating a dungeon [v1.3.0]
 * Part 4 - Field of View [v1.4.0]
 * Part 5 - Placing Enemies and kicking them (harmlessly) [v1.5.0]
+* Part 6 - Doing (and taking) some damage [v1.6.0]
 
 
 ## Notes
@@ -33,9 +34,14 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 1. Still playing catch up
 2. I've just about given up on the type annotations. They may be useful but they do obscure the code's meaning.
 
-
 ### 5.1 Refactoring
 
 1. Aaargh!
 2. I'm removing the type annotations as I revisit code
+
+### Part 6
+
+1. There's a lot of stuff here even with the refactoring broken out.
+2. It's still got that weird OO thing where we reset the engine's event handler inside the fighter component (i.e. the fighter component knows about the game engine.)
+
 
