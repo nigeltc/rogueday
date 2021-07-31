@@ -3,6 +3,7 @@ Genric dungeon entities
 """
 import copy
 from typing import Tuple
+from render_order import RenderOrder
 
 class Entity:
     """
@@ -19,13 +20,15 @@ class Entity:
             char="@",
             color=(255, 255, 255),
             name="<Unamed>",
-            blocks_movement=False):
+            blocks_movement=False,
+            render_order=RenderOrder.CORPSE):
         self.x = x
         self.y = y
         self.char = char
         self.color = color
         self.name = name
         self.blocks_movement = blocks_movement
+        self.render_order = render_order
         if gamemap:
             self.gamemap = gamemap
             gamemap.entities.add(self)
@@ -77,7 +80,8 @@ class Actor(Entity):
             char=char,
             color=color,
             name=name,
-            blocks_movement=True)
+            blocks_movement=True,
+            render_order=RenderOrder.ACTOR)
         self.ai = ai_cls(self)
         self.fighter = fighter
         self.fighter.entity = self
