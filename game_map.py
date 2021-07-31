@@ -1,6 +1,8 @@
 from typing import Iterable
 import numpy as np
 from tcod.console import Console
+
+from entity import Actor
 import tile_types
 
 class GameMap:
