@@ -52,4 +52,11 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 1. The health bar and message log are nice additions.
 2. The "name under mouse" and history viewer might have been better kept as optional extra pieces.
 
+### 7.1 More refactoring
+
+1. Still Aaargh!
+2. BaseAI is an Action? Really?
+3. These changes broke my code quite badly. The loop looking for other entities blocking the path in get\_path\_to() needs modification.
+
+
 

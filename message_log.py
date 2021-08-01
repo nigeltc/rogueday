@@ -32,11 +32,16 @@ class MessageLog:
         self.render_messages(console, x, y,width, height, self.messages)
 
     @staticmethod
-    def render_messages(console, x, y, width, height, messages):
+    def wrap(string, width):
+        for line in string.splitlines():
+            yield from textwrap.wrap(line, width, expand_tabs=True)
+        
+    @classmethod
+    def render_messages(cls, console, x, y, width, height, messages):
         """Render the messages provided"""
         y_offset = height - 1
         for msg in reversed(messages):
-            for line in reversed(textwrap.wrap(msg.full_text, width)):
+            for line in reversed(list(cls.wrap(msg.full_text, width))):
                 console.print(x=x, y=y+y_offset, string=line, fg=msg.fg)
                 y_offset -= 1
                 if y_offset < 0:

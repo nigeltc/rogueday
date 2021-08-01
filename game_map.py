@@ -27,6 +27,9 @@ class GameMap:
                                 fill_value=False,
                                 order="F")
 
+    @property
+    def gamemap(self):
+        return self
 
     @property
     def actors(self):

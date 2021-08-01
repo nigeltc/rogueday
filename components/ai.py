@@ -2,9 +2,8 @@ import numpy as np
 import tcod
 
 from actions import Action, MeleeAction, MovementAction, WaitAction
-from components.base_component import BaseComponent
 
-class BaseAI(Action, BaseComponent):
+class BaseAI(Action):
     entity = None
     
     def perform(self):
@@ -18,9 +17,10 @@ class BaseAI(Action, BaseComponent):
         # add cost for blocking entities
         # a lower cost means more entities will crowd behind each other in hallways
         # a higher cost means entities will take longer paths to surround the player
-        for entity in self.gamemap.entities:
-            if entity.blocks_movement and cost[entity.x, entity.y]:
-                cost[entity.x, entity.y] += 10
+        if self.entity:
+            for entity in self.entity.gamemap.entities:
+                if entity.blocks_movement and cost[entity.x, entity.y]:
+                    cost[entity.x, entity.y] += 10
 
         # create a graph from the cost array and pass it to a new pathfinder
         graph = tcod.path.SimpleGraph(cost=cost, cardinal=2, diagonal=3)

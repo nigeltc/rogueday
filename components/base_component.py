@@ -4,14 +4,14 @@ Components attached to entities
 
 
 class BaseComponent:
-    entity = None
+    parent = None
 
     @property
     def engine(self):
-        return self.entity.gamemap.engine
+        return self.gamemap.engine
 
     @property
     def gamemap(self):
-        return self.entity.gamemap
+        return self.parent.gamemap
 
     

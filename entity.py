@@ -10,11 +10,11 @@ class Entity:
     A generic dungeon Entity
     """
 
-    gamemap = None
+    parent = None
     
     def __init__(
             self,
-            gamemap=None,
+            parent=None,
             x=0,
             y=0,
             char="@",
@@ -29,16 +29,20 @@ class Entity:
         self.name = name
         self.blocks_movement = blocks_movement
         self.render_order = render_order
-        if gamemap:
-            self.gamemap = gamemap
-            gamemap.entities.add(self)
+        if parent:
+            self.parent = parent
+            parent.entities.add(self)
 
+    @property
+    def gamemap(self):
+        return self.parent.gamemap if self.parent else None
+    
     def spawn(self, gamemap, x, y):
         """Spawn a copy of this entity at the given location."""
         clone = copy.deepcopy(self)
         clone.x = x
         clone.y = y
-        clone.gamemap = gamemap
+        clone.parent = gamemap
         gamemap.entities.add(clone)
         return clone
         
@@ -50,10 +54,10 @@ class Entity:
         self.x = x
         self.y = y
         if gamemap:
-            if hasattr(self, "gamemap"): # Possibly uninitialized
-                if self.gamemap:
+            if hasattr(self, "parent"): # Possibly uninitialized
+                if self.gamemap and self.parent is self.gamemap:
                     self.gamemap.entities.remove(self)
-            self.gamemap = gamemap
+            self.parent = gamemap
             gamemap.entities.add(self)
             
 
@@ -84,7 +88,7 @@ class Actor(Entity):
             render_order=RenderOrder.ACTOR)
         self.ai = ai_cls(self)
         self.fighter = fighter
-        self.fighter.entity = self
+        self.fighter.parent = self
 
     @property
     def is_alive(self):
