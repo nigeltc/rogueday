@@ -11,7 +11,7 @@ from entity import Entity
 from game_map import GameMap
 from input_handlers import MainGameEventHandler
 from message_log import MessageLog
-from render_functions import render_bar
+from render_functions import render_bar, render_names_at_mouse_location
 
 class Engine:
     gamemap = None
@@ -19,6 +19,7 @@ class Engine:
     def __init__(self, player):
         self.event_handler = MainGameEventHandler(self)
         self.message_log = MessageLog()
+        self.mouse_location = (0, 0)
         self.player = player
 
     def handle_enemy_turns(self):
@@ -36,13 +37,12 @@ class Engine:
         self.game_map.explored |= self.game_map.visible
         
             
-    def render(self, console, context):
+    def render(self, console):
         self.game_map.render(console)
         self.message_log.render(console=console, x=21, y=45,width=40, height=5)
         render_bar(console=console,
                    current_val=self.player.fighter.hp,
                    max_val=self.player.fighter.max_hp,
                    total_width=20)
-        
-        context.present(console)
-        console.clear()
+        render_names_at_mouse_location(console=console, x=21, y=44,engine=self)
+

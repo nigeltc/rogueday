@@ -45,16 +45,27 @@ class EventHandler(tcod.event.EventDispatch[Action]):
     def __init__(self, engine):
         self.engine = engine
 
-    def handle_events(self):
-        raise NotImplementedError()
+    def handle_events(self, context):
+        for event in tcod.event.wait():
+            context.convert_event(event)
+            self.dispatch(event)
+
+    def ev_mousemotion(self, event):
+        if self.engine.game_map.in_bounds(event.tile.x, event.tile.y):
+            self.engine.mouse_location = event.tile.x, event.tile.y
 
     def ev_quit(self, event):
         raise SystemExit()
 
+    def on_render(self, console):
+        self.engine.render(console)
+
+        
 class MainGameEventHandler(EventHandler):
     
-    def handle_events(self):
+    def handle_events(self, context):
         for event in tcod.event.wait():
+            context.convert_event(event)
             action = self.dispatch(event)
             if action is None:
                 continue
@@ -82,7 +93,7 @@ class MainGameEventHandler(EventHandler):
     
 class GameOverEventHandler(EventHandler):
     
-    def handle_events(self):
+    def handle_events(self, context):
         for event in tcod.event.wait():
             action = self.dispatch(event)
             if action is None:
