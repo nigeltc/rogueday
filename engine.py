@@ -10,6 +10,7 @@ from tcod.map import compute_fov
 from entity import Entity
 from game_map import GameMap
 from input_handlers import MainGameEventHandler
+from render_functions import render_bar
 
 class Engine:
     gamemap = None
@@ -36,8 +37,10 @@ class Engine:
     def render(self, console, context):
         self.game_map.render(console)
 
-        console.print(x=1, y=47,
-                      string=f"HP: {self.player.fighter.hp}")
+        render_bar(console=console,
+                   current_val=self.player.fighter.hp,
+                   max_val=self.player.fighter.max_hp,
+                   total_width=20)
         
         context.present(console)
         console.clear()
