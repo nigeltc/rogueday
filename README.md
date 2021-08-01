@@ -1,4 +1,6 @@
 # Rogueday - Following along with Y.A.R.T
+These are notes on my attempt to follow along with the RoguelikeDev does The Complete Roguelike Tutorial in 2021. I fell behind quite a lot but the tutorial is an excellent introduction to writing a Roguelike. My grumpy comments are just me being grumpy.
+
 
 https://rogueliketutorials.com/tutorials/tcod/v2/
 
@@ -9,6 +11,7 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 * Part 4 - Field of View [v1.4.0]
 * Part 5 - Placing Enemies and kicking them (harmlessly) [v1.5.0]
 * Part 6 - Doing (and taking) some damage [v1.6.0]
+* Part 7 - Creating the Interface [v1.7.0]
 
 
 ## Notes
@@ -43,5 +46,10 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 
 1. There's a lot of stuff here even with the refactoring broken out.
 2. It's still got that weird OO thing where we reset the engine's event handler inside the fighter component (i.e. the fighter component knows about the game engine.)
+
+### Part 7
+
+1. The health bar and message log are nice additions.
+2. The "name under mouse" and history viewer might have been better kept as optional extra pieces.
 
 
