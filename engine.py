@@ -10,6 +10,7 @@ from tcod.map import compute_fov
 from entity import Entity
 from game_map import GameMap
 from input_handlers import MainGameEventHandler
+from message_log import MessageLog
 from render_functions import render_bar
 
 class Engine:
@@ -17,6 +18,7 @@ class Engine:
     
     def __init__(self, player):
         self.event_handler = MainGameEventHandler(self)
+        self.message_log = MessageLog()
         self.player = player
 
     def handle_enemy_turns(self):
@@ -36,7 +38,7 @@ class Engine:
             
     def render(self, console, context):
         self.game_map.render(console)
-
+        self.message_log.render(console=console, x=21, y=45,width=40, height=5)
         render_bar(console=console,
                    current_val=self.player.fighter.hp,
                    max_val=self.player.fighter.max_hp,

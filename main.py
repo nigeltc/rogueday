@@ -3,6 +3,7 @@ import copy
 import tcod
 
 from actions import EscapeAction, MovementAction
+import color
 from engine import Engine
 from entity import Entity
 import entity_factories
@@ -13,7 +14,7 @@ def main() -> None:
     screen_height = 50
 
     map_width = 80
-    map_height = 45
+    map_height = 43
 
     room_max_size = 10
     room_min_size = 6
@@ -35,6 +36,9 @@ def main() -> None:
         max_monsters_per_room=max_monsters_per_room,
         engine=engine)
     engine.update_fov()
+    engine.message_log.add_message(
+        "Hello and welcome, adventurer, to Yet Another Roguelike Tutorial!",
+        color.welcome_text)
     
     with tcod.context.new_terminal(
             screen_width,
