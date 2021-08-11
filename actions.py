@@ -2,6 +2,7 @@
 Game actions
 """
 import color
+import exceptions
 
 class Action:
     """Base action"""
@@ -62,7 +63,7 @@ class MeleeAction(ActionWithDirection):
     def perform(self):
         target = self.target_actor
         if not target:
-            return
+            raise exceptions.Impossible("Nothing to attack.")
         damage = self.entity.fighter.power - target.fighter.defense
         attack_desc = f"{self.entity.name.capitalize()} attacks {target.name}"
         if self.entity is self.engine.player:
@@ -88,13 +89,13 @@ class MovementAction(ActionWithDirection):
 
         if not self.engine.game_map.in_bounds(dest_x, dest_y):
             # destination is out of bounds
-            return
+            raise exceptions.Impossible("That way is blocked.")
         if not self.engine.game_map.tiles["walkable"][dest_x, dest_y]:
             # destination is blocked
-            return
+            raise exceptions.Impossible("That way is blocked.")
         if self.engine.game_map.get_blocking_entity_at_location(dest_x, dest_y):
             # destination is blocked by an entity
-            return
+            raise exceptions.Impossible("That way is blocked.")
         self.entity.move(self.dx, self.dy)
 
 

@@ -12,6 +12,7 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 * Part 5 - Placing Enemies and kicking them (harmlessly) [v1.5.0]
 * Part 6 - Doing (and taking) some damage [v1.6.0]
 * Part 7 - Creating the Interface [v1.7.0]
+* Part 8 - Items and Inventory
 
 
 ## Notes
@@ -58,5 +59,9 @@ https://rogueliketutorials.com/tutorials/tcod/v2/
 2. BaseAI is an Action? Really?
 3. These changes broke my code quite badly. The loop looking for other entities blocking the path in get\_path\_to() needs modification.
 
+### Part 8
+
+1. The exception catching seems to destroy the whole class hierarchy!
+2. We don't get to the inventory system until about a third of the way in.
 
 

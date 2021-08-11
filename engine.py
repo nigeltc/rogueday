@@ -8,6 +8,7 @@ from tcod.console import Console
 from tcod.map import compute_fov
 
 from entity import Entity
+import exceptions
 from game_map import GameMap
 from input_handlers import MainGameEventHandler
 from message_log import MessageLog
@@ -25,7 +26,10 @@ class Engine:
     def handle_enemy_turns(self):
         for entity in self.game_map.entities - {self.player}:
             if entity.ai:
-                entity.ai.perform()
+                try:
+                    entity.ai.perform()
+                except exceptions.Impossible:
+                    pass  # Ignore impossible AI actions
         
     def update_fov(self) -> None:
         """Recompute the visible area based on theplayer's PoV"""
